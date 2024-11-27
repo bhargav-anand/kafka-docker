@@ -51,13 +51,13 @@
 
 ## Design Decisions
 
-1. Set up a local development environment using Docker
-      Docker Compose is configured to include:
-         -Kafka and Zookeeper for the messaging system.
-         -Data Generator container (my-python-producer) producing messages to the user-login topic.
-         -Consumer Application container for processing messages.
-      Ports and Networks are properly set up for communication between services.
-2. Design and implement a Kafka consumer
+1. Set up a local development environment using Docker <br />
+      Docker Compose is configured to include: <br />
+         -Kafka and Zookeeper for the messaging system. <br />
+         -Data Generator container (my-python-producer) producing messages to the user-login topic. <br />
+         -Consumer Application container for processing messages. <br />
+      Ports and Networks are properly set up for communication between services. <br />
+2. Design and implement a Kafka consumer <br />
       Kafka Consumer implemented in Python:
          -Consumes data from the user-login topic.
          -Transforms and processes data as per requirements.
