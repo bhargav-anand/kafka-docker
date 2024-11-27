@@ -78,7 +78,7 @@
         -Logs errors for JSON decode issues and Kafka errors.
       Missing fields (device_type) are assigned default values.
 
-## Addition Questions
+## Additional Questions
 1. This application can be deployed in Kubernetes cluster for production use cases. The application needs to be tested with 2x or 3x times of expected messages to identify the optimal number of partitions for each topic. The replication factor can be configured while topic creation to ensure fault tolerance. The consumer groups can be scaled dynamically based on data production if the existing consumers cant consume the whole data. We can leverage KEDA by adding it to kubernetes cluster to scale consumer group based on consumer lag.
 2. The cluster can be scaled horizontally by scaling up brokers based on load on the nodes. The partitons have to reassigned subsequently to levearge the new brokers. You can provide the topics to move in a JSON file and brooker list to reassign partitions as parameters and generate a reassignment JSON file whihc can be used to reassign partitions to new brokers.
 
