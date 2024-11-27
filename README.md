@@ -58,11 +58,11 @@
          -Consumer Application container for processing messages. <br />
       Ports and Networks are properly set up for communication between services. <br />
 2. Design and implement a Kafka consumer <br />
-      Kafka Consumer implemented in Python:
-         -Consumes data from the user-login topic.
-         -Transforms and processes data as per requirements.
-         -Handles missing fields (e.g., device_type defaults to 'unknown').
-         -Logs insights (e.g., popular device_type).
+      Kafka Consumer implemented in Python:  
+         -Consumes data from the user-login topic.  
+         -Transforms and processes data as per requirements.  
+         -Handles missing fields (e.g., device_type defaults to 'unknown').  
+         -Logs insights (e.g., popular device_type).  
 3. Configure another Kafka Topic and store the processed data
       Processed data is sent to the processed-data Kafka topic using the Producer.
 4. Handle streaming data continuously and efficiently
