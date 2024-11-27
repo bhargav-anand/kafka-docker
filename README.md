@@ -51,34 +51,34 @@
 
 ## Design Decisions
 
-1. Set up a local development environment using Docker <br />
-      Docker Compose is configured to include: <br />
-         -Kafka and Zookeeper for the messaging system. <br />
-         -Data Generator container (my-python-producer) producing messages to the user-login topic. <br />
-         -Consumer Application container for processing messages. <br />
-      Ports and Networks are properly set up for communication between services. <br />
-2. Design and implement a Kafka consumer <br />
+1. Set up a local development environment using Docker  
+      Docker Compose is configured to include:  
+         -Kafka and Zookeeper for the messaging system.  
+         -Data Generator container (my-python-producer) producing messages to the user-login topic.  
+         -Consumer Application container for processing messages.  
+      Ports and Networks are properly set up for communication between services.  
+2. Design and implement a Kafka consumer  
       Kafka Consumer implemented in Python:  
          -Consumes data from the user-login topic.  
          -Transforms and processes data as per requirements.  
          -Handles missing fields (e.g., device_type defaults to 'unknown').  
-         -Logs insights (e.g., popular device_type).  
-3. Configure another Kafka Topic and store the processed data
-      Processed data is sent to the processed-data Kafka topic using the Producer.
-4. Handle streaming data continuously and efficiently
-      Continuous data processing in a while True loop with efficient polling.
-      Handles errors such as:
-         -JSON decoding errors.
-         -Kafka-specific errors (e.g., network issues).
-         -Default values for missing fields ensure robustness.
-      Logging added for debugging and monitoring.
-5. Error handling and missing fields
-      Error handling is implemented:
-        -Logs warnings for missing fields.
-        -Logs errors for JSON decode issues and Kafka errors.
-      Missing fields (device_type) are assigned default values.
+         -Logs insights (e.g., popular device_type).   
+3. Configure another Kafka Topic and store the processed data  
+      Processed data is sent to the processed-data Kafka topic using the Producer.  
+4. Handle streaming data continuously and efficiently  
+      Continuous data processing in a while True loop with efficient polling.  
+      Handles errors such as:  
+         -JSON decoding errors.  
+         -Kafka-specific errors (e.g., network issues).  
+         -Default values for missing fields ensure robustness.  
+      Logging added for debugging and monitoring.  
+5. Error handling and missing fields  
+      Error handling is implemented:  
+        -Logs warnings for missing fields.  
+        -Logs errors for JSON decode issues and Kafka errors.  
+      Missing fields (device_type) are assigned default values.  
 
-## Additional Questions
-1. This application can be deployed in Kubernetes cluster for production use cases. The application needs to be tested with 2x or 3x times of expected messages to identify the optimal number of partitions for each topic. The replication factor can be configured while topic creation to ensure fault tolerance. The consumer groups can be scaled dynamically based on data production if the existing consumers cant consume the whole data. We can leverage KEDA by adding it to kubernetes cluster to scale consumer group based on consumer lag.
+## Additional Questions  
+1. This application can be deployed in Kubernetes cluster for production use cases. The application needs to be tested with 2x or 3x times of expected messages to identify the optimal number of partitions for each topic. The replication factor can be configured while topic creation to ensure fault tolerance. The consumer groups can be scaled dynamically based on data production if the existing consumers cant consume the whole data. We can leverage KEDA by adding it to kubernetes cluster to scale consumer group based on consumer lag.  
 2. The cluster can be scaled horizontally by scaling up brokers based on load on the nodes. The partitons have to reassigned subsequently to levearge the new brokers. You can provide the topics to move in a JSON file and brooker list to reassign partitions as parameters and generate a reassignment JSON file whihc can be used to reassign partitions to new brokers.
 
